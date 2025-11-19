@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { api, mediaUrl } from "../api/client";
 
 import { Title, ErrorText } from "../styles";
@@ -33,6 +33,7 @@ export default function Feed({ user }: Props) {
   const [content, setContent] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const [posting, setPosting] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Estados de comentários
   type Comment = {
@@ -294,16 +295,18 @@ export default function Feed({ user }: Props) {
               <S.UploadRow>
                 {/* input nativo escondido */}
                 <input
+                  ref={fileInputRef}
                   type="file"
                   accept="image/*"
                   onChange={(e) => setImage(e.target.files?.[0] || null)}
-                  style={{ display: "none" }}
-                  id="composer-file-input"
+                  style={{ position: "absolute", left: -9999, width: 1, height: 1, opacity: 0 }}
                 />
-                {/* botão estilizado que abre o seletor */}
-                <label htmlFor="composer-file-input">
-                  <S.UploadButton type="button">Escolher imagem</S.UploadButton>
-                </label>
+                <S.UploadButton
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  Escolher imagem
+                </S.UploadButton>
                 {image && <S.FileName>{image.name}</S.FileName>}
                 <S.ActionButton type="submit" disabled={posting || (!content.trim() && !image)}>
                   {posting ? "Publicando..." : "Publicar"}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { api, mediaUrl } from "../api/client";
 import { Title, ErrorText, PrimaryButton } from "../styles";
 import * as LS from "./Login_styles";
@@ -21,6 +21,7 @@ export default function Profile({ onUpdated }: Props) {
   const [bio, setBio] = useState("");
   const [profileUrl, setProfileUrl] = useState<string | null>(null);
   const [profileFile, setProfileFile] = useState<File | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [followingUsers, setFollowingUsers] = useState<Array<{ id: number; username: string; profile_picture: string | null }>>([]);
   const [followingLoading, setFollowingLoading] = useState(false);
@@ -108,15 +109,18 @@ export default function Profile({ onUpdated }: Props) {
 
         {/* input de arquivo oculto + botão estilizado reaproveitado do Feed */}
         <input
+          ref={fileInputRef}
           type="file"
           accept="image/*"
           onChange={onPickFile}
-          style={{ display: "none" }}
-          id="profile-file-input"
+          style={{ position: "absolute", left: -9999, width: 1, height: 1, opacity: 0 }}
         />
-        <label htmlFor="profile-file-input">
-          <FeedUploadButton type="button">Escolher imagem</FeedUploadButton>
-        </label>
+        <FeedUploadButton
+          type="button"
+          onClick={() => fileInputRef.current?.click()}
+        >
+          Escolher imagem
+        </FeedUploadButton>
         {profileFile && <FeedFileName>{profileFile.name}</FeedFileName>}
 
         <LS.TextInput value={username} readOnly placeholder="Username" />
