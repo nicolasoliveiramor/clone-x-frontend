@@ -2,7 +2,8 @@ import { useEffect, useState, useRef } from "react";
 import { api, mediaUrl } from "../api/client";
 import { Title, ErrorText, PrimaryButton } from "../styles";
 import * as LS from "./Login_styles";
-import { UploadButton as FeedUploadButton, FileName as FeedFileName } from "./Feed_styles";
+import { UploadButton as FeedUploadButton, FileName as FeedFileName, UserName } from "./Feed_styles";
+import { FollowingSection, FollowingList, FollowingRow, SmallAvatarPreview, HiddenFileInput } from "./Profile_styles";
 
 type Props = {
   onUpdated?: (user: any) => void;
@@ -108,12 +109,11 @@ export default function Profile({ onUpdated }: Props) {
         </LS.AvatarPreview>
 
         {/* input de arquivo oculto + botão estilizado reaproveitado do Feed */}
-        <input
+        <HiddenFileInput
           ref={fileInputRef}
           type="file"
           accept="image/*"
           onChange={onPickFile}
-          style={{ position: "absolute", left: -9999, width: 1, height: 1, opacity: 0 }}
         />
         <FeedUploadButton
           type="button"
@@ -150,25 +150,25 @@ export default function Profile({ onUpdated }: Props) {
         </PrimaryButton>
       </LS.Form>
 
-      <div style={{ marginTop: 16 }}>
+      <FollowingSection>
         <Title>Seguindo</Title>
         {followingLoading && <div>Carregando...</div>}
         {followingUsers.length === 0 && !followingLoading && <div>Você ainda não segue ninguém.</div>}
-        <div style={{ display: "grid", gap: 8 }}>
+        <FollowingList>
           {followingUsers.map((u) => (
-            <div key={u.id} style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <LS.AvatarPreview style={{ width: 36, height: 36 }}>
+            <FollowingRow key={u.id}>
+              <SmallAvatarPreview>
                 {u.profile_picture ? (
                   <img src={mediaUrl(u.profile_picture)} alt="Avatar" />
                 ) : (
                   <span>{u.username?.[0]?.toUpperCase() || "U"}</span>
                 )}
-              </LS.AvatarPreview>
-              <div style={{ fontWeight: 700 }}>{u.username}</div>
-            </div>
+              </SmallAvatarPreview>
+              <UserName>{u.username}</UserName>
+            </FollowingRow>
           ))}
-        </div>
-      </div>
+        </FollowingList>
+      </FollowingSection>
     </div>
   );
 }

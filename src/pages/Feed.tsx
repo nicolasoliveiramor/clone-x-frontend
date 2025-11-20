@@ -294,12 +294,11 @@ export default function Feed({ user }: Props) {
               />
               <S.UploadRow>
                 {/* input nativo escondido */}
-                <input
+                <S.HiddenFileInput
                   ref={fileInputRef}
                   type="file"
                   accept="image/*"
                   onChange={(e) => setImage(e.target.files?.[0] || null)}
-                  style={{ position: "absolute", left: -9999, width: 1, height: 1, opacity: 0 }}
                 />
                 <S.UploadButton
                   type="button"
@@ -441,10 +440,10 @@ export default function Feed({ user }: Props) {
                       )}
                     </S.UserAvatar>
                     <div>
-                      <div style={{ fontWeight: 700 }}>{u.username}</div>
-                      <div style={{ fontSize: 12, color: "#657786" }}>
+                      <S.UserName>{u.username}</S.UserName>
+                      <S.FollowersCount>
                         Seguidores • {u.followers_count}
-                      </div>
+                      </S.FollowersCount>
                     </div>
                   </S.UserInfo>
                   <S.FollowButton

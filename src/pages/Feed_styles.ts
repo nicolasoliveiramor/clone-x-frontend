@@ -222,6 +222,26 @@ export const FileName = styled.span`
   color: #657786;
 `;
 
+// Input de arquivo invisível, porém acionável via clique programático
+export const HiddenFileInput = styled.input`
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+`;
+
+// Texto do nome do usuário na lista lateral
+export const UserName = styled.div`
+  font-weight: 700;
+`;
+
+// Rótulo de seguidores na lista lateral
+export const FollowersCount = styled.div`
+  font-size: 12px;
+  color: #657786;
+`;
+
 // Coluna direita com usuários
 export const PageGrid = styled.div`
   display: grid;
