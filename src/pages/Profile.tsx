@@ -3,7 +3,7 @@ import { api, mediaUrl } from "../api/client";
 import { Title, ErrorText, PrimaryButton } from "../styles";
 import * as LS from "./Login_styles";
 import { UploadButton as FeedUploadButton, FileName as FeedFileName, UserName } from "./Feed_styles";
-import { FollowingSection, FollowingList, FollowingRow, SmallAvatarPreview, HiddenFileInput } from "./Profile_styles";
+import { ProfileContainer, FollowingSection, FollowingList, FollowingRow, SmallAvatarPreview, HiddenFileInput } from "./Profile_styles";
 
 type Props = {
   onUpdated?: (user: any) => void;
@@ -94,7 +94,7 @@ export default function Profile({ onUpdated }: Props) {
   if (loading) return <div>Carregando...</div>;
 
   return (
-    <div>
+    <ProfileContainer>
       <Title>Editar Perfil</Title>
       {err && <ErrorText>{err}</ErrorText>}
 
@@ -169,6 +169,6 @@ export default function Profile({ onUpdated }: Props) {
           ))}
         </FollowingList>
       </FollowingSection>
-    </div>
+    </ProfileContainer>
   );
 }

@@ -20,6 +20,7 @@ export const Form = styled.form`
   gap: 12px;
   width: 100%;
   max-width: 420px;
+  margin: 0 auto;
   @media (max-width: 425px) {
     max-width: 340px;
     gap: 10px;

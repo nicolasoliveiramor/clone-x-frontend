@@ -404,16 +404,21 @@ export const FollowersCount = styled.div`
 export const PageGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 320px;
+  grid-template-areas: 'main right';
   gap: 16px;
   align-items: start;       /* garante topo alinhado entre colunas */
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
+    grid-template-areas:
+      'right'
+      'main';
   }
 `;
 
 export const MainColumn = styled.div`
   display: grid;
   gap: 16px;
+  grid-area: main;
 `;
 
 export const RightColumn = styled.div`
@@ -421,6 +426,7 @@ export const RightColumn = styled.div`
   gap: 16px;
   align-content: start;     /* conteúdo inicia no topo */
   justify-items: stretch;   /* filhos ocupam 100% da largura disponível */
+  grid-area: right;
   @media (max-width: 425px) {
     gap: 12px;
   }

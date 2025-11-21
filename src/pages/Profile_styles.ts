@@ -1,8 +1,18 @@
 import styled from "styled-components"
 import * as LS from "./Login_styles"
 
+export const ProfileContainer = styled.div`
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+`
+
 export const FollowingSection = styled.div`
   margin-top: 16px;
+  width: 100%;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
 `
 
 export const FollowingList = styled.div`
