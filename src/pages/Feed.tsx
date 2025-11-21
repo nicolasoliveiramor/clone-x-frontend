@@ -342,6 +342,19 @@ export default function Feed({ user }: Props) {
             {/* Lista de posts */}
             {posts.map((p) => (
               <S.PostCard key={p.id}>
+                {(user && (p.author === user.id || p.author_username === user.username)) && (
+                  <S.DeleteIcon
+                    aria-label="Excluir"
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      deletePost(p.id);
+                    }}
+                    disabled={!!busyDelete[p.id]}
+                  >
+                    {busyDelete[p.id] ? "…" : "×"}
+                  </S.DeleteIcon>
+                )}
                 <S.HeaderRow>
                   <S.Avatar>
                     {p.author_profile_picture ? (
@@ -394,19 +407,7 @@ export default function Feed({ user }: Props) {
                     Comentar
                   </S.ActionButton>
 
-                  {(user && (p.author === user.id || p.author_username === user.username)) && (
-                    <S.ActionButton
-                      type="button"
-                      $variant="delete"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        deletePost(p.id);
-                      }}
-                      disabled={!!busyDelete[p.id]}
-                    >
-                      {busyDelete[p.id] ? "Excluindo..." : "Excluir"}
-                    </S.ActionButton>
-                  )}
+                  
 
                   <S.StatLabel>Comentários {p.comments_count}</S.StatLabel>
                 </S.ActionsRow>

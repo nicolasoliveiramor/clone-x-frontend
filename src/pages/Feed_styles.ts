@@ -44,6 +44,7 @@ export const PostCard = styled.div`
   background: #fff;
   display: grid;
   gap: 8px;
+  position: relative;
 `;
 
 export const HeaderRow = styled.div`
@@ -220,6 +221,26 @@ export const FileName = styled.span`
   margin-left: 8px;
   font-size: 12px;
   color: #657786;
+`;
+
+export const DeleteIcon = styled.button`
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: ${theme.colors.danger};
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(224, 36, 94, 0.1);
+  }
 `;
 
 // Input de arquivo invisível, porém acionável via clique programático
