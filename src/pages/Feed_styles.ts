@@ -4,6 +4,12 @@ import { theme } from "../styles";
 export const FeedContainer = styled.div`
   display: grid;
   gap: 16px;
+  @media (max-width: 768px) {
+    gap: 12px;
+  }
+  @media (max-width: 425px) {
+    gap: 10px;
+  }
 `;
 
 export const ComposerForm = styled.form`
@@ -13,6 +19,14 @@ export const ComposerForm = styled.form`
   background: #fff;
   display: grid;
   gap: 8px;
+  @media (max-width: 768px) {
+    padding: 10px;
+    gap: 8px;
+  }
+  @media (max-width: 425px) {
+    padding: 8px;
+    gap: 6px;
+  }
 `;
 
 export const Textarea = styled.textarea`
@@ -29,12 +43,28 @@ export const Textarea = styled.textarea`
     border-color: ${theme.colors.primary};
     box-shadow: 0 0 0 3px rgba(29, 161, 242, 0.15);
   }
+  @media (max-width: 768px) {
+    min-height: 64px;
+  }
+  @media (max-width: 425px) {
+    min-height: 60px;
+    padding: 8px 10px;
+    font-size: 13px;
+  }
 `;
 
 export const UploadRow = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 8px;
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  @media (max-width: 425px) {
+    gap: 6px;
+  }
 `;
 
 export const PostCard = styled.div`
@@ -45,12 +75,23 @@ export const PostCard = styled.div`
   display: grid;
   gap: 8px;
   position: relative;
+  @media (max-width: 768px) {
+    padding: 10px;
+    gap: 8px;
+  }
+  @media (max-width: 425px) {
+    padding: 8px;
+    gap: 6px;
+  }
 `;
 
 export const HeaderRow = styled.div`
   display: flex;
   gap: 12px;
   align-items: center;
+  @media (max-width: 425px) {
+    gap: 8px;
+  }
 `;
 
 export const Avatar = styled.div`
@@ -69,6 +110,10 @@ export const Avatar = styled.div`
     border-radius: 50%;
     display: block;
   }
+  @media (max-width: 425px) {
+    width: 32px;
+    height: 32px;
+  }
 `;
 
 export const AuthorName = styled.div`
@@ -82,6 +127,9 @@ export const Timestamp = styled.div`
 
 export const Content = styled.div`
   font-size: 14px;
+  @media (max-width: 425px) {
+    font-size: 13px;
+  }
 `;
 
 export const PostImage = styled.img`
@@ -98,6 +146,16 @@ export const ActionsRow = styled.div`
   justify-content: space-between;
   padding: 0 12px;
   width: 100%;
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-start;
+    padding: 0 8px;
+  }
+  @media (max-width: 425px) {
+    gap: 6px;
+    padding: 0;
+  }
 `;
 
 export const ActionButton = styled.button<{ $variant?: "like" | "retweet" | "delete"; $active?: boolean }>`
@@ -115,6 +173,14 @@ export const ActionButton = styled.button<{ $variant?: "like" | "retweet" | "del
   &:hover {
     background: rgba(29, 161, 242, 0.08);
   }
+  @media (max-width: 768px) {
+    min-width: 88px;
+  }
+  @media (max-width: 425px) {
+    min-width: auto;
+    padding: 6px 8px;
+    font-size: 13px;
+  }
 `;
 
 export const StatLabel = styled.span`
@@ -125,6 +191,10 @@ export const EmptyState = styled.div`
   padding: 24px;
   text-align: center;
   color: #657786;
+  @media (max-width: 425px) {
+    padding: 16px;
+    font-size: 14px;
+  }
 `;
 
 // Área de comentários
@@ -133,11 +203,17 @@ export const CommentsBox = styled.div`
   padding-top: 8px;
   display: grid;
   gap: 8px;
+  @media (max-width: 425px) {
+    gap: 6px;
+  }
 `;
 
 export const CommentsList = styled.div`
   display: grid;
   gap: 8px;
+  @media (max-width: 425px) {
+    gap: 6px;
+  }
 `;
 
 export const CommentItem = styled.div`
@@ -150,6 +226,9 @@ export const CommentHeader = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+  @media (max-width: 425px) {
+    gap: 6px;
+  }
 `;
 
 export const CommentAvatar = styled.div`
@@ -178,10 +257,16 @@ export const CommentAuthor = styled.span`
 export const CommentTimestamp = styled.span`
   font-size: 12px;
   color: #657786;
+  @media (max-width: 425px) {
+    font-size: 11px;
+  }
 `;
 
 export const CommentContent = styled.div`
   font-size: 14px;
+  @media (max-width: 425px) {
+    font-size: 13px;
+  }
 `;
 
 export const CommentDeleteIcon = styled.button`
@@ -205,12 +290,21 @@ export const CommentDeleteIcon = styled.button`
   &:hover {
     background: rgba(224, 36, 94, 0.1);
   }
+  @media (max-width: 425px) {
+    width: 18px;
+    height: 18px;
+    font-size: 14px;
+    line-height: 18px;
+  }
 `;
 
 export const CommentForm = styled.form`
   display: flex;
   align-items: center;
   gap: 8px;
+  @media (max-width: 425px) {
+    gap: 6px;
+  }
 `;
 
 export const CommentInput = styled.input`
@@ -224,6 +318,9 @@ export const CommentInput = styled.input`
     outline: none;
     border-color: ${theme.colors.primary};
     box-shadow: 0 0 0 3px rgba(29, 161, 242, 0.15);
+  }
+  @media (max-width: 425px) {
+    font-size: 13px;
   }
 `;
 
@@ -239,12 +336,19 @@ export const UploadButton = styled.button`
   &:hover {
     background: rgba(29, 161, 242, 0.08);
   }
+  @media (max-width: 425px) {
+    padding: 6px 10px;
+  }
 `;
 
 export const FileName = styled.span`
   margin-left: 8px;
   font-size: 12px;
   color: #657786;
+  @media (max-width: 425px) {
+    font-size: 11px;
+    margin-left: 6px;
+  }
 `;
 
 export const DeleteIcon = styled.button`
@@ -267,6 +371,12 @@ export const DeleteIcon = styled.button`
 
   &:hover {
     background: rgba(224, 36, 94, 0.1);
+  }
+  @media (max-width: 425px) {
+    width: 22px;
+    height: 22px;
+    font-size: 16px;
+    line-height: 22px;
   }
 `;
 
@@ -296,8 +406,7 @@ export const PageGrid = styled.div`
   grid-template-columns: 1fr 320px;
   gap: 16px;
   align-items: start;       /* garante topo alinhado entre colunas */
-
-  @media (max-width: 900px) {
+  @media (max-width: 768px) {
     grid-template-columns: 1fr;
   }
 `;
@@ -312,6 +421,9 @@ export const RightColumn = styled.div`
   gap: 16px;
   align-content: start;     /* conteúdo inicia no topo */
   justify-items: stretch;   /* filhos ocupam 100% da largura disponível */
+  @media (max-width: 425px) {
+    gap: 12px;
+  }
 `;
 
 export const SidebarCard = styled.div`
@@ -326,6 +438,9 @@ export const SidebarCard = styled.div`
   gap: 10px;
   align-items: center;
   box-sizing: border-box;     /* padding/margem contabilizados na largura */
+  @media (max-width: 768px) {
+    max-width: none;
+  }
 `;
 
 export const SidebarTitle = styled.div`
@@ -337,6 +452,9 @@ export const UsersList = styled.div`
   display: grid;
   gap: 8px;
   justify-items: stretch;     /* cada linha ocupa 100% */
+  @media (max-width: 425px) {
+    gap: 6px;
+  }
 `;
 
 export const UserRow = styled.div`
@@ -345,12 +463,18 @@ export const UserRow = styled.div`
   gap: 16px;
   justify-content: space-between;
   width: 100%;                /* linhas esticadas evitam espaço sobrando */
+  @media (max-width: 425px) {
+    gap: 12px;
+  }
 `;
 
 export const UserInfo = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+  @media (max-width: 425px) {
+    gap: 8px;
+  }
 `;
 
 export const UserAvatar = styled.div`
@@ -368,6 +492,10 @@ export const UserAvatar = styled.div`
     object-fit: cover;
     border-radius: 50%;
   }
+  @media (max-width: 425px) {
+    width: 28px;
+    height: 28px;
+  }
 `;
 
 export const FollowButton = styled.button<{ $active?: boolean }>`
@@ -383,5 +511,13 @@ export const FollowButton = styled.button<{ $active?: boolean }>`
 
   &:hover {
     background: rgba(29, 161, 242, 0.08);
+  }
+  @media (max-width: 768px) {
+    min-width: 90px;
+  }
+  @media (max-width: 425px) {
+    min-width: 80px;
+    padding: 6px 8px;
+    font-size: 13px;
   }
 `;

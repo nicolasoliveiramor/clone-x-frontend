@@ -10,11 +10,20 @@ export const PageCenter = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media (max-width: 425px) {
+    padding: 16px;
+  }
 `;
 
 export const Form = styled.form`
   display: grid;
   gap: 12px;
+  width: 100%;
+  max-width: 420px;
+  @media (max-width: 425px) {
+    max-width: 340px;
+    gap: 10px;
+  }
 `;
 export const TextInput = styled.input`
   padding: 10px 12px;
@@ -25,6 +34,9 @@ export const TextInput = styled.input`
     outline: none;
     border-color: ${theme.colors.primary};
     box-shadow: 0 0 0 3px rgba(29, 161, 242, 0.15);
+  }
+  @media (max-width: 425px) {
+    font-size: 13px;
   }
 `;
 
@@ -39,6 +51,9 @@ export const TextArea = styled.textarea`
     outline: none;
     border-color: ${theme.colors.primary};
     box-shadow: 0 0 0 3px rgba(29, 161, 242, 0.15);
+  }
+  @media (max-width: 425px) {
+    font-size: 13px;
   }
 `;
 
@@ -61,6 +76,10 @@ export const AvatarPreview = styled.div`
     font-weight: 600;
     color: ${theme.colors.text};
   }
+  @media (max-width: 425px) {
+    width: 80px;
+    height: 80px;
+  }
 `;
 
 // Linha de ações dentro do formulário (alinha os botões)
@@ -72,5 +91,8 @@ export const ActionsRow = styled.div`
   width: 100%;
   > button {
     width: 100%;
+  }
+  @media (max-width: 425px) {
+    gap: 6px;
   }
 `;

@@ -10,8 +10,7 @@ export const theme = {
     border: "#e6ecf0",
   },
   fonts: {
-    base:
-      "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', 'DejaVu Sans', sans-serif",
+    base: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', 'DejaVu Sans', sans-serif",
   },
 };
 
@@ -49,7 +48,14 @@ export const GlobalStyle = createGlobalStyle`
 export const AppContainer = styled.div<{ $noPad?: boolean }>`
   max-width: 820px;
   margin: 0 auto;
-  padding: ${({ $noPad }) => ($noPad ? '0' : '16px 0')};
+  padding: ${({ $noPad }) => ($noPad ? "0" : "16px 0")};
+  @media (max-width: 768px) {
+    max-width: 100%;
+    padding: ${({ $noPad }) => ($noPad ? "0" : "12px 0")};
+  }
+  @media (max-width: 425px) {
+    padding: ${({ $noPad }) => ($noPad ? "0" : "8px 0")};
+  }
 `;
 
 export const NavBar = styled.nav`
@@ -57,6 +63,10 @@ export const NavBar = styled.nav`
   gap: 12px;
   margin-bottom: 16px;
   align-items: center;
+  @media (max-width: 425px) {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
 `;
 
 export const NavLink = styled(Link)`
@@ -76,6 +86,10 @@ export const PrimaryButton = styled.button`
   padding: 8px 12px;
   font-weight: 600;
   transition: filter 0.15s ease;
+  @media (max-width: 425px) {
+    padding: 8px 10px;
+    border-radius: 6px;
+  }
 
   &:hover {
     filter: brightness(0.95);
@@ -91,6 +105,12 @@ export const Title = styled.h2`
   margin: 0 0 8px 0;
   font-family: ${theme.fonts.base};
   font-size: 20px;
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
+  @media (max-width: 425px) {
+    font-size: 16px;
+  }
 `;
 
 export const ErrorText = styled.div`
@@ -117,5 +137,9 @@ export const AvatarLink = styled(Link)`
     object-fit: cover;
     border-radius: 50%;
     display: block;
+  }
+  @media (max-width: 425px) {
+    width: 28px;
+    height: 28px;
   }
 `;
