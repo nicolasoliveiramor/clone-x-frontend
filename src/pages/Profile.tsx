@@ -1,12 +1,12 @@
 import { useEffect, useState, useRef } from "react";
-import { api, mediaUrl } from "../api/client";
+import { api, mediaUrl, type AuthUser } from "../api/client";
 import { Title, ErrorText, PrimaryButton } from "../styles";
 import * as LS from "./Login_styles";
 import { UploadButton as FeedUploadButton, FileName as FeedFileName, UserName } from "./Feed_styles";
 import { ProfileContainer, FollowingSection, FollowingList, FollowingRow, SmallAvatarPreview, HiddenFileInput } from "./Profile_styles";
 
 type Props = {
-  onUpdated?: (user: any) => void;
+  onUpdated?: (user: AuthUser) => void;
 };
 
 export default function Profile({ onUpdated }: Props) {

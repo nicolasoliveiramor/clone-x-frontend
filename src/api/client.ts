@@ -27,7 +27,39 @@ const ensureCsrf = async () => {
   }
 };
 
-const request = async (path: string, init: RequestInit = {}) => {
+export type AuthUser = {
+  id: number;
+  username: string;
+  email: string;
+  first_name?: string;
+  last_name?: string;
+  profile_picture?: string | null;
+  bio?: string | null;
+};
+
+export type UserSummary = {
+  id: number;
+  username: string;
+  first_name?: string;
+  last_name?: string;
+  profile_picture: string | null;
+  followers_count: number;
+  following_count: number;
+  followed_by_me?: boolean;
+};
+
+export type UserDetail = {
+  id: number;
+  username: string;
+  first_name?: string;
+  last_name?: string;
+  profile_picture: string | null;
+  bio?: string | null;
+  followers_count: number;
+  following_count: number;
+};
+
+const request = async <T = any>(path: string, init: RequestInit = {}): Promise<T> => {
   const headers = new Headers(init.headers || {});
   const method = (init.method || "GET").toUpperCase();
 
@@ -62,7 +94,7 @@ const request = async (path: string, init: RequestInit = {}) => {
     throw new Error(typeof data === "string" ? data : JSON.stringify(data));
   }
 
-  return data;
+  return data as T;
 };
 
 // Converte caminho de mídia para URL absoluta do backend
@@ -101,10 +133,8 @@ export const api = {
         method: "POST",
       });
     },
-    profile() {
-      return request("/auth/profile/", {
-        method: "GET",
-      });
+    profile(): Promise<AuthUser> {
+      return request<AuthUser>("/auth/profile/", { method: "GET" });
     },
     checkAuth() {
       return request("/auth/check-auth/", {
@@ -134,7 +164,7 @@ export const api = {
       return request("/auth/profile/", { method: "PATCH", body: JSON.stringify(rest) });
     },
     // Listar todos os usuários (exceto o logado)
-    listUsers() {
+    listUsers(): Promise<UserSummary[] | { results: UserSummary[] }> {
       return request("/auth/users/", { method: "GET" });
     },
     // Seguir usuário
@@ -146,16 +176,16 @@ export const api = {
       return request(`/auth/follow/${userId}/`, { method: "DELETE" });
     },
     // Lista quem um usuário segue
-    following(userId: number) {
+    following(userId: number): Promise<UserSummary[] | { results: UserSummary[] }> {
       return request(`/auth/${userId}/following/`, { method: "GET" });
     },
     // Lista seguidores de um usuário
-    followers(userId: number) {
+    followers(userId: number): Promise<UserSummary[] | { results: UserSummary[] }> {
       return request(`/auth/${userId}/followers/`, { method: "GET" });
     },
     // Detalhe público de um usuário por id
-    userDetail(id: number) {
-      return request(`/auth/users/${id}/`, { method: "GET" });
+    userDetail(id: number): Promise<UserDetail> {
+      return request<UserDetail>(`/auth/users/${id}/`, { method: "GET" });
     },
   },
   posts: {

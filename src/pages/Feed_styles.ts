@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link as RouterLink } from "react-router-dom";
 import { theme } from "../styles";
 
 export const FeedContainer = styled.div`
@@ -105,6 +106,11 @@ export const AuthorLink = styled.div`
   }
 `;
 
+export const PlainLink = styled(RouterLink)`
+  text-decoration: none;
+  color: inherit;
+`;
+
 export const Avatar = styled.div`
   width: 36px;
   height: 36px;
@@ -166,6 +172,19 @@ export const ActionsRow = styled.div`
   @media (max-width: 425px) {
     gap: 6px;
     padding: 0;
+  }
+`;
+
+export const ActionIcon = styled.span`
+  margin-right: 6px;
+  @media (max-width: 425px) {
+    margin-right: 4px;
+  }
+`;
+
+export const ActionText = styled.span`
+  @media (max-width: 425px) {
+    display: none;
   }
 `;
 

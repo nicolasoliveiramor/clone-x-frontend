@@ -1,7 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { api, mediaUrl } from "../api/client";
-import { Link } from "react-router-dom";
-
 import { Title, ErrorText } from "../styles";
 
 import * as S from "./Feed_styles";
@@ -61,7 +59,7 @@ export default function Feed({ user }: Props) {
     profile_picture: string | null;
     followers_count: number;
     following_count: number;
-    followed_by_me: boolean;
+    followed_by_me?: boolean;
   };
   const [usersList, setUsersList] = useState<UserItem[]>([]);
   const [loadingUsers, setLoadingUsers] = useState(false);
@@ -101,15 +99,15 @@ export default function Feed({ user }: Props) {
     setLoading(false);
   }
 
+  function isPaged<T>(d: T[] | { results: T[] }): d is { results: T[] } {
+    return !Array.isArray(d);
+  }
+
   async function loadUsers() {
     setLoadingUsers(true);
     try {
       const data = await api.auth.listUsers();
-      const list: UserItem[] = Array.isArray(data)
-        ? data
-        : Array.isArray(data?.results)
-        ? data.results
-        : [];
+      const list: UserItem[] = isPaged<UserItem>(data) ? data.results : data;
       setUsersList(list);
     } catch (e: any) {
       // não quebra feed; apenas loga erro
@@ -355,7 +353,7 @@ export default function Feed({ user }: Props) {
                   </S.DeleteIcon>
                 )}
                 <S.HeaderRow>
-                  <Link to={`/user/${p.author}`} style={{ textDecoration: "none", color: "inherit" }}>
+                  <S.PlainLink to={`/user/${p.author}`}>
                     <S.AuthorLink>
                       <S.Avatar>
                         {p.author_profile_picture ? (
@@ -369,7 +367,7 @@ export default function Feed({ user }: Props) {
                         <S.Timestamp>{timeAgo(p.created_at)}</S.Timestamp>
                       </div>
                     </S.AuthorLink>
-                  </Link>
+                  </S.PlainLink>
                 </S.HeaderRow>
     
                 <S.Content>{p.content}</S.Content>
@@ -385,7 +383,8 @@ export default function Feed({ user }: Props) {
                       toggleLike(p);
                     }}
                   >
-                    {p.liked_by_me ? "Descurtir" : "Curtir"} {p.likes_count}
+                    <S.ActionIcon>{p.liked_by_me ? "♥" : "♡"}</S.ActionIcon>
+                    <S.ActionText>{p.liked_by_me ? "Descurtir" : "Curtir"}</S.ActionText> {p.likes_count}
                   </S.ActionButton>
     
                   <S.ActionButton
@@ -397,7 +396,8 @@ export default function Feed({ user }: Props) {
                       toggleRetweet(p);
                     }}
                   >
-                    {p.retweeted_by_me ? "Remover" : "Retweet"} {p.retweets_count}
+                    <S.ActionIcon>🔁</S.ActionIcon>
+                    <S.ActionText>{p.retweeted_by_me ? "Remover" : "Retweet"}</S.ActionText> {p.retweets_count}
                   </S.ActionButton>
 
                   <S.ActionButton
@@ -407,7 +407,8 @@ export default function Feed({ user }: Props) {
                       toggleComments(p.id);
                     }}
                   >
-                    Comentar
+                    <S.ActionIcon>💬</S.ActionIcon>
+                    <S.ActionText>Comentar</S.ActionText>
                   </S.ActionButton>
 
                   
@@ -488,11 +489,11 @@ export default function Feed({ user }: Props) {
                       )}
                     </S.UserAvatar>
                     <div>
-                      <Link to={`/user/${u.id}`} style={{ textDecoration: "none", color: "inherit" }}>
+                      <S.PlainLink to={`/user/${u.id}`}>
                         <S.UserLink>
                           <S.UserName>{u.username}</S.UserName>
                         </S.UserLink>
-                      </Link>
+                      </S.PlainLink>
                       <S.FollowersCount>
                         Seguidores • {u.followers_count}
                       </S.FollowersCount>

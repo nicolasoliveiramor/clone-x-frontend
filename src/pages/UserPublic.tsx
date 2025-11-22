@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams, Link } from "react-router-dom"
-import { api, mediaUrl } from "../api/client"
+import { api, mediaUrl, type UserDetail } from "../api/client"
 import { Title } from "../styles"
 import * as US from "./UserPublic_styles"
 import * as LS from "./Login_styles"
@@ -8,7 +8,7 @@ import * as LS from "./Login_styles"
 export default function UserPublic() {
   const { id } = useParams()
   const userId = Number(id)
-  const [user, setUser] = useState<any | null>(null)
+  const [user, setUser] = useState<UserDetail | null>(null)
   const [loading, setLoading] = useState(true)
   const [err, setErr] = useState<string | null>(null)
 
