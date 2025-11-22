@@ -94,6 +94,17 @@ export const HeaderRow = styled.div`
   }
 `;
 
+export const AuthorLink = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+  @media (max-width: 425px) {
+    gap: 8px;
+  }
+`;
+
 export const Avatar = styled.div`
   width: 36px;
   height: 36px;
@@ -481,6 +492,11 @@ export const UserInfo = styled.div`
   @media (max-width: 425px) {
     gap: 8px;
   }
+`;
+
+export const UserLink = styled.div`
+  text-decoration: none;
+  color: inherit;
 `;
 
 export const UserAvatar = styled.div`

@@ -207,8 +207,8 @@ export default function Feed({ user }: Props) {
         ...prev,
         [postId]: (prev[postId] || []).filter((c) => c.id !== commentId),
       }));
-      const newLen = (commentsByPost[postId]?.length || 1) - 1;
-      setPosts((prev) => prev.map((p) => (p.id === postId ? { ...p, comments_count: Math.max(0, newLen) } : p)));
+      const fresh = await api.posts.get(postId);
+      setPosts((prev) => prev.map((p) => (p.id === postId ? { ...p, ...fresh } : p)));
     } catch (e: any) {
       setErr(e.message || "Erro ao excluir comentário");
     } finally {
@@ -355,18 +355,20 @@ export default function Feed({ user }: Props) {
                   </S.DeleteIcon>
                 )}
                 <S.HeaderRow>
-                  <Link to={`/user/${p.author}`} style={{ textDecoration: "none", color: "inherit", display: "flex", alignItems: "center", gap: 12 }}>
-                    <S.Avatar>
-                      {p.author_profile_picture ? (
-                        <img src={mediaUrl(p.author_profile_picture)} alt="Avatar" />
-                      ) : (
-                        p.author_username?.[0]?.toUpperCase() || "U"
-                      )}
-                    </S.Avatar>
-                    <div>
-                      <S.AuthorName>{p.author_username}</S.AuthorName>
-                      <S.Timestamp>{timeAgo(p.created_at)}</S.Timestamp>
-                    </div>
+                  <Link to={`/user/${p.author}`} style={{ textDecoration: "none", color: "inherit" }}>
+                    <S.AuthorLink>
+                      <S.Avatar>
+                        {p.author_profile_picture ? (
+                          <img src={mediaUrl(p.author_profile_picture)} alt="Avatar" />
+                        ) : (
+                          p.author_username?.[0]?.toUpperCase() || "U"
+                        )}
+                      </S.Avatar>
+                      <div>
+                        <S.AuthorName>{p.author_username}</S.AuthorName>
+                        <S.Timestamp>{timeAgo(p.created_at)}</S.Timestamp>
+                      </div>
+                    </S.AuthorLink>
                   </Link>
                 </S.HeaderRow>
     
@@ -487,7 +489,9 @@ export default function Feed({ user }: Props) {
                     </S.UserAvatar>
                     <div>
                       <Link to={`/user/${u.id}`} style={{ textDecoration: "none", color: "inherit" }}>
-                        <S.UserName>{u.username}</S.UserName>
+                        <S.UserLink>
+                          <S.UserName>{u.username}</S.UserName>
+                        </S.UserLink>
                       </Link>
                       <S.FollowersCount>
                         Seguidores • {u.followers_count}

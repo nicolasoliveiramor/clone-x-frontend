@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams, Link } from "react-router-dom"
 import { api, mediaUrl } from "../api/client"
 import { Title } from "../styles"
+import * as US from "./UserPublic_styles"
 import * as LS from "./Login_styles"
 
 export default function UserPublic() {
@@ -24,7 +25,7 @@ export default function UserPublic() {
   if (!user) return <div>Usuário não encontrado</div>
 
   return (
-    <div>
+    <US.Container>
       <Title>Perfil de {user.username}</Title>
       <LS.AvatarPreview>
         {user.profile_picture ? (
@@ -33,12 +34,12 @@ export default function UserPublic() {
           <span>{user.username?.[0]?.toUpperCase() || "U"}</span>
         )}
       </LS.AvatarPreview>
-      <div style={{ marginTop: 12, fontWeight: 700 }}>{user.first_name} {user.last_name}</div>
-      <div style={{ marginTop: 6 }}>{user.bio || ""}</div>
-      <div style={{ marginTop: 8, color: "#657786" }}>Seguidores • {user.followers_count} | Seguindo • {user.following_count}</div>
-      <div style={{ marginTop: 16 }}>
+      <US.Name>{user.first_name} {user.last_name}</US.Name>
+      <US.Bio>{user.bio || ""}</US.Bio>
+      <US.Meta>Seguidores • {user.followers_count} | Seguindo • {user.following_count}</US.Meta>
+      <US.BackRow>
         <Link to="/">Voltar ao feed</Link>
-      </div>
-    </div>
+      </US.BackRow>
+    </US.Container>
   )
 }
