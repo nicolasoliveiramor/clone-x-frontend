@@ -1,4 +1,4 @@
-# Clone X - Frontend
+# Minha Rede Social - Frontend
 
 Aplicação React (Vite + TypeScript) que consome a API do backend para publicar posts, curtir, retweetar, comentar, editar perfil e seguir usuários. Responsiva para telas até 768px e 425px.
 
