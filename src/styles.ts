@@ -126,6 +126,20 @@ export const SuccessText = styled.div`
   font-weight: 600;
 `;
 
+export const BrandTitle = styled.div`
+  font-family: ${theme.fonts.base};
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.2;
+  margin: 0 0 8px 0;
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
+  @media (max-width: 425px) {
+    font-size: 22px;
+  }
+`;
+
 // Avatar/link para o perfil
 // Componente AvatarLink
 export const AvatarLink = styled(Link)`

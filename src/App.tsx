@@ -11,7 +11,7 @@ import Login from "./pages/Login";
 import Feed from "./pages/Feed";
 import Profile from "./pages/Profile";
 import UserPublic from "./pages/UserPublic";
-import { AppContainer, NavBar, NavLink, PrimaryButton } from "./styles";
+import { AppContainer, NavBar, NavLink, PrimaryButton, BrandTitle } from "./styles";
 import { AvatarLink } from "./styles";
 import Register from "./pages/Register";
 import { mediaUrl } from "./api/client";
@@ -105,6 +105,7 @@ function App() {
               user.username?.[0]?.toUpperCase() || "U"
             )}
           </AvatarLink>
+          <BrandTitle>Minha Rede 💬</BrandTitle>
           {onProfilePage ? (
             <NavLink to="/">Feed</NavLink>
           ) : (
